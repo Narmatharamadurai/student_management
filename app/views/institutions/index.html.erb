@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+ <div class="card card-cascade narrower">
+          <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+
+            <a href="" class="white-text mx-3">Institutions</a>
+             <div>
+              <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2 waves-effect waves-light"><a href='institutions/new'><i class="fas fa-pencil-alt mt-0" style='color:white'>New</i></a></button>
+             
+            </div>
+          
+          </div>
+           
+          
+
+          <div class="px-4">
+
+            <div class="table-wrapper">
+              
+              <table class="table table-hover mb-0">
+
+               
+                <thead>
+                  <tr>
+                    <th class="th-lg">
+                       Name
+                    </th>
+                    <th class="th-lg">
+                      Address
+                    </th>
+                    <th class="th-lg">
+                      Phone
+                    </th>
+                    <th class="th-lg">
+                      Country
+                    </th>
+          
+
+                  </tr>
+                </thead>
+                <tbody>
+                   <% @institutions.each do |institution| %>
+                  <tr>
+                   
+                    <td><%= institution.name %></td>
+                    <td><%= institution.address%></td>
+                    <td><%= institution.phone%></td>
+                    <td><%= institution.country.country_name rescue nil%></td>
+                    <td><%= link_to 'Show', institution %></td>
+        <td><%= link_to 'Edit', edit_institution_path(institution) %></td>
+        <td><%= link_to 'Destroy', institution, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                  </tr>
+                  <%end%>
+                </tbody>                
+              </table>             
+            </div>
+          </div>
+        </div>
+
+<%#= link_to 'New Institution', new_institution_path %>

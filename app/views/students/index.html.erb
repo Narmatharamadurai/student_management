@@ -1,0 +1,87 @@
+
+<p id="notice"><%= notice %></p>
+
+        
+        <div class="card card-cascade narrower">
+          <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+
+            <a href="" class="white-text mx-3">Students</a>
+             <div>
+              <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2 waves-effect waves-light"><a href='students/new'><i class="fas fa-pencil-alt mt-0" style="color:white">New</i></a></button>
+             
+            </div>
+          
+          </div>
+           <table>
+    <tr>
+      <td>
+         Name : <%= text_field :student,:full_name_search%>
+      </td>
+      <td>Institution: <%= text_field :student,:institution_search%></td>
+      <td>Country: <%= collection_select :student,:country_search,Country.all,'id','country_name',{:prompt => 'All'}%></td>
+      <td><%=submit_tag 'Search',:id=>'check_date',:class => 'buttons',:onclick=> "myFunction();" %></td>
+    </tr>
+  </table>
+          
+
+          <div class="px-4">
+
+            <div id="students_list" class="table-wrapper">
+              
+             <%=render :partial=> "student_list"%>          
+            </div>
+          </div>
+        </div>
+
+                 <%= will_paginate @students  %>
+   
+
+
+<%#= link_to 'New Student', new_student_path %>
+<!--<script>
+  $(document).ready(function() {
+    // Setup - add a text input to each footer cell
+    $('#students thead tr').clone(true).appendTo( '#students thead' );
+    $('#students thead tr:eq(1) th.th-sm').each( function (i) {
+        var title = $(this).text();
+        $(this).html( '<input style="width:70px" type="text" placeholder="'+title+'" />' );
+ 
+        $( 'input', this ).on( 'keyup change', function () {
+            if ( table.column(i).search() !== this.value ) {
+                table
+                    .column(i)
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+ 
+    var table = $('#students').DataTable( {
+        orderCellsTop: true,
+        fixedHeader: true
+    } );
+} );
+</script>-->
+<script>
+  function myFunction()
+  {
+ var pars = "full_name=" + document.getElementById('student_full_name_search').value + "&institution=" + document.getElementById('student_institution_search').value+ "&country_id=" + document.getElementById('student_country_search').value;
+    $.ajax({
+      url :'search', 
+    data: pars,
+    method: 'get',
+    success:function(results) {
+       $("#students_list").html(results);
+       $('.pagination').hide();
+   }
+});
+  }
+ //   alert(1)
+ // var pars = "student_name=" + $('student_full_name_search').value + "&institution=" + $('student_institution_search').value+ "&country=" + $ ('student_country_search').value; 
+//  alert(pars)
+ //var myAjax = $ajax.Updater('search_wise', '/student/search_list', {
+ //parameters: pars,
+ //method: 'get'
+ //})
+//}  
+  </script>

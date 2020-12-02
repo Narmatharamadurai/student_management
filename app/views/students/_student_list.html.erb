@@ -1,0 +1,49 @@
+ <table id="students" class="table table-hover mb-0">
+
+               
+                <thead>
+                  <tr>
+                    <th class="th-sm">
+                      Full Name
+                        
+                    </th>
+                    <th class="th-sm">
+                     Address
+                        
+                    </th>
+                    <th class="th-sm">
+                      Phone
+                     
+                    </th>
+                    <th class="th-sm">
+                      Institution
+                      
+                    </th>
+                     <th class="th-sm">
+                      Country
+                      
+                    </th>
+                    <th class="th-sm">
+                     Status
+                    </th>
+                    <th class="th-lg"> Action </th>
+                  </tr>
+                </thead>
+                <tbody>
+                   <% @students.each do |student| %>
+                  <tr>
+                   
+                    <td><%= student.full_name %></td>
+                    <td><%= student.address%></td>
+                    <td><%= student.mobile%></td>
+                    <td><%= student.institution.name%></td>
+                    <td><%= student.country.country_name rescue nil%></td>
+                    <td><%= student.status%></td>
+                    <td><%= link_to 'Approve',:controller=>'students',:action=>'update_status',:status=>'Approve',:id=>student.id%> /
+                     <%= link_to 'Reject',:controller=>'students',:action=>'update_status',:status=>'Reject',:id=>student.id%> / <%= link_to 'Show', student %> / <%= link_to 'Edit', edit_student_path(student) %> / <%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                  </tr>
+                  <%end%>
+                  <div id ='search_wise'></div>
+                </tbody>                
+              </table>   
+
